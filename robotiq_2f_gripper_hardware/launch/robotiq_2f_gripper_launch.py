@@ -15,8 +15,8 @@ def generate_launch_description():
     )
     serial_port_arg = DeclareLaunchArgument(
         'serial_port',
-        default_value='/dev/ttyUSB0',
-        description='Serial port of the gripper'
+        default_value='/tmp/ttyUR',
+        description='Serial port of the gripper. For UR tool communication forwarding, use /tmp/ttyUR.'
     )
     baudrate_arg = DeclareLaunchArgument(
         'baudrate',

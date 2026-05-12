@@ -15,7 +15,7 @@ The repo contains four ROS2 packages (detailed description below):
 
 ## Getting Started
 
-These instrcutions assume you have ROS2 (tested with ROS2 Humble) installed. The repo depends on the [serial-ros2](https://github.com/RoverRobotics-forks/serial-ros2) package for communication with the gripper. An updated fork of the serial-ros2 repo is included as a submodule to this repo.
+These instructions assume you have ROS2 Jazzy installed. The repo depends on the [serial-ros2](https://github.com/RoverRobotics-forks/serial-ros2) package for communication with the gripper. An updated fork of the serial-ros2 repo is included as a submodule to this repo.
 
 Clone this repo to your ROS2 workspace and build the ROS2 packages:
 
@@ -116,9 +116,15 @@ ros2 launch robotiq_2f_gripper_hardware robotiq_2f_gripper_launch.py fake_hardwa
 
 Alongside the action server this also publishes mocked joint states and gripper states.
 
-*serial_port* (default: /dev/ttyUSB0)
+*serial_port* (default: /tmp/ttyUR)
 
-It's assumed that you work on a Linux machine. If you have multiple USB devices connected to your computer find out to which serial port your Robotiq gripper is connected and set the ```serial_port:=<your_port>``` launch argument:
+For this VLA cell, the Robotiq 2F-140 is connected through the UR5 controller box. Launch the UR driver with tool communication forwarding enabled, then use the forwarded device at ```/tmp/ttyUR```:
+
+```bash
+ros2 launch robotiq_2f_gripper_hardware robotiq_2f_gripper_launch.py serial_port:=/tmp/ttyUR
+```
+
+If you instead connect the gripper directly to the PC via a USB/RS-485 adapter, set the ```serial_port:=<your_port>``` launch argument:
 
 ```bash
 ros2 launch robotiq_2f_gripper_hardware robotiq_2f_gripper_launch.py serial_port:=/dev/ttyUSB1
@@ -147,7 +153,7 @@ This package should not be run or launched. Instead it provides a message templa
 1. When launching the gripper:
 
 ```bash
-ros2 launch robotiq_2f_gripper_hardware robotiq_2f_gripper_launch.py serial_port:=/dev/ttyUSB0
+ros2 launch robotiq_2f_gripper_hardware robotiq_2f_gripper_launch.py serial_port:=/tmp/ttyUR
 
 ```
 
@@ -158,7 +164,7 @@ and you receive:
 [robotiq_2f_gripper_node-1]   what():  IO Exception (2): No such file or directory, file /home/jannis.haberhausen/GitHub/robotiq_2f_gripper_ros2/src/serial-ros2/src/impl/unix.cc, line 152.
 ```
 
-Fix: connect the USB of the robotiq gripper.
+Fix: confirm the UR driver created `/tmp/ttyUR`, or connect the USB/RS-485 adapter if using direct PC wiring.
 
 2. When sending an action to the gripper action server:
 

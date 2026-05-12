@@ -11,10 +11,19 @@
 
   <depend>launch</depend>
   <depend>launch_ros</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_action</depend>
   <depend>robotiq_2f_gripper_interfaces</depend>
   <depend>robotiq_2f_gripper_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
   <depend>yaml-cpp</depend>
   <depend>ament_index_cpp</depend>
+
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>xacro</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
